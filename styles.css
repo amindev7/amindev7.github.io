@@ -16,14 +16,14 @@ body {
 }
 
 #section1 {
-  position: relative; /* Enable positioning for child elements */
+  position: relative;
   background-color: #425981;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  overflow: hidden; /* Ensure animations don't spill out */
+  overflow: hidden;
 }
 
 .welcome-text {
