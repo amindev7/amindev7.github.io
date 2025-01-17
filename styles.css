@@ -29,13 +29,41 @@ body {
   height: 100%;
   overflow: hidden;
   font-family: var(--font-family);
-}
-
-body {
   color: var(--text-color);
 }
 
-/* Full-Height Sections */
+input,
+textarea,
+label,
+body {
+  cursor: none;
+}
+
+.custom-cursor {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  opacity: 0.5;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease;
+  z-index: 9999;
+}
+
+.custom-cursor.hovered {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.circle:hover ~ .custom-cursor {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
 .section {
   height: 100vh;
 }
@@ -82,7 +110,7 @@ body {
   background-color: var(--secondary-color);
   border: none;
   border-radius: var(--border-radius);
-  cursor: pointer;
+  cursor: none;
   text-decoration: none;
   transform: scale(0.8);
   transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
@@ -133,27 +161,21 @@ body {
 @keyframes smoothMovement {
   0% {
     transform: translate(0, 0) scale(1) rotate(60deg);
-    opacity: 1;
   }
   20% {
     transform: translate(250px, -150px) scale(1.2) rotate(15deg);
-    opacity: 0.8;
   }
   40% {
     transform: translate(150px, 200px) scale(0.4) rotate(-10deg);
-    opacity: 0.6;
   }
   60% {
     transform: translate(-200px, 50px) scale(1.8) rotate(25deg);
-    opacity: 0.7;
   }
   80% {
     transform: translate(50px, -100px) scale(0.6) rotate(-20deg);
-    opacity: 0.9;
   }
   100% {
     transform: translate(0, 0) scale(1.5) rotate(0deg);
-    opacity: 1;
   }
 }
 
@@ -161,8 +183,14 @@ body {
   position: absolute;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
-  animation: smoothMovement 50s ease-in-out infinite;
+  animation: smoothMovement 20s ease-in-out infinite;
   will-change: transform, opacity;
+  transition: opacity 0.3s ease;
+}
+
+.circle:hover {
+  animation-play-state: paused;
+  opacity: 0;
 }
 
 /* Circles Specific Positioning */
@@ -245,7 +273,7 @@ body {
   background-color: var(--border-color);
   border: 3px solid var(--border-color);
   border-radius: 6px;
-  cursor: pointer;
+  cursor: none;
   transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -308,6 +336,7 @@ body {
 .footer-links a:hover {
   color: var(--highlight-color);
   transform: scale(1.3);
+  cursor: none;
 }
 
 .footer-links i {

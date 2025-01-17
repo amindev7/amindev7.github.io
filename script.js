@@ -153,3 +153,22 @@ function renderStatusMessage(message, status) {
     statusElement.style.display = "none";
   }, 5000);
 }
+
+// Custom cursor
+const cursor = document.createElement("div");
+cursor.classList.add("custom-cursor");
+document.body.appendChild(cursor);
+
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = `${e.pageX}px`;
+  cursor.style.top = `${e.pageY}px`;
+});
+
+document.querySelectorAll(".circle").forEach((circle) => {
+  circle.addEventListener("mouseover", () => {
+    cursor.classList.add("hovered");
+  });
+  circle.addEventListener("mouseout", () => {
+    cursor.classList.remove("hovered");
+  });
+});
