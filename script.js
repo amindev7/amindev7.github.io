@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         i++;
         setTimeout(() => typeWriter(callback), 30);
       } else {
-        welcomeText.innerHTML += "<br />"; // Insert line break after each line
+        welcomeText.innerHTML += "<br />";
         i = 0;
         line++;
         setTimeout(() => typeWriter(callback), 300);
@@ -58,10 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Render the button after typing animation is complete
   function showButton() {
-    scrollButton.style.display = "inline-flex"; // Make button visible
-    scrollButton.classList.add("fade-in"); // Add animation class
+    scrollButton.style.display = "inline-flex";
+    scrollButton.classList.add("fade-in");
   }
 
   scrollButton.addEventListener("click", () => {
@@ -71,3 +70,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
   typeWriter(showButton);
 });
+
+(function () {
+  emailjs.init("g1pUfGR5AgOTCye8z");
+})();
+
+window.onload = function () {
+  document
+    .getElementById("contact-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const form = this;
+      const formData = new FormData(form);
+
+      const name = formData.get("user_name");
+      const email = formData.get("user_email");
+      const message = formData.get("message");
+
+      if (!name || !email || !message) {
+        renderStatusMessage("Please fill out all fields.", "error");
+        return;
+      }
+
+      emailjs.sendForm("service_anq7jbm", "template_t0p83if", form).then(
+        () => {
+          renderStatusMessage(`Thank you, ${name}!`, "success");
+          form.reset();
+        },
+        (error) => {
+          console.error("Failed to send the message:", error);
+          renderStatusMessage(
+            "Oops! Something went wrong. Please try again later.",
+            "error"
+          );
+        }
+      );
+    });
+};
+
+function renderStatusMessage(message, status) {
+  const statusElement = document.getElementById("form-status");
+  statusElement.textContent = message;
+  statusElement.className = `form-status ${status}`;
+  statusElement.style.display = "block";
+
+  setTimeout(() => {
+    statusElement.style.display = "none";
+  }, 5000);
+}
