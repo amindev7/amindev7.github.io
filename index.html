@@ -2,49 +2,94 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="keywords"
+      content="portfolio amindev7, Amin Said Mohamed, web developer, contact"
+    />
+    <meta
+      name="description"
+      content="Explore the portfolio of Amin Said Mohamed amindev7, a skilled web developer. Learn about projects, connect on GitHub and LinkedIn, or send a message directly!"
+    />
 
-    <title>Section to Section Scroll</title>
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
-    ></script>
-    <link rel="stylesheet" href="styles.css" />
+    <title>amindev7</title>
+    <link rel="icon" href="code.svg" type="image/svg+xml" />
+
+    <!-- Font Awesome -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- EmailJS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+      defer
+    ></script>
+
+    <!-- Script -->
+    <script src="script.js" defer></script>
   </head>
+
   <body>
+    <!-- Section 1 -->
     <div id="section1" class="section">
       <div class="circle"></div>
       <div class="circle"></div>
       <div class="circle"></div>
       <div class="circle"></div>
+
+      <!-- Welcome Text -->
       <div class="welcome-text" id="welcomeText"></div>
+
+      <!-- Contact Button -->
       <button class="contact-me-button" id="scrollButton">
         <span>Contact Me</span>
         <i class="fa-solid fa-arrow-down"></i>
       </button>
     </div>
 
+    <!-- Section 2 -->
     <div class="section" id="section2">
       <div class="circle"></div>
       <div class="circle"></div>
       <div class="circle"></div>
       <div class="circle"></div>
+
+      <!-- Contact Form -->
       <div class="contact-form-container">
         <form id="contact-form">
-          <label>Name</label>
-          <input type="text" name="user_name" required />
-          <label>Email</label>
-          <input type="email" name="user_email" required />
-          <label>Message</label>
-          <textarea name="message" required></textarea>
+          <label for="user_name">Name</label>
+          <input
+            type="text"
+            id="user_name"
+            name="user_name"
+            required
+            minlength="2"
+          />
+
+          <label for="user_email">Email</label>
+          <input type="email" id="user_email" name="user_email" required />
+
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            minlength="10"
+          ></textarea>
+
           <input type="submit" value="Send" />
         </form>
         <div id="form-status" class="form-status"></div>
       </div>
+
+      <!-- Footer -->
       <div class="footer">
         <div class="footer-links">
           <a
@@ -62,6 +107,7 @@
             <i class="fa-brands fa-linkedin"></i>
           </a>
         </div>
+
         <div class="footer-copyright">
           <p>
             Amin Said Mohamed<span> &#169;</span>
@@ -70,7 +116,5 @@
         </div>
       </div>
     </div>
-
-    <script src="script.js"></script>
   </body>
 </html>

@@ -1,33 +1,56 @@
-function scrollToSection(direction) {
+// Section Scrolling Logic
+document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".section");
-  let currentSection = document.querySelector(".section:hover") || sections[0];
-  const index = Array.from(sections).indexOf(currentSection);
+  let currentSection = sections[0];
 
-  if (direction === "down" && index < sections.length - 1) {
-    sections[index + 1].scrollIntoView({ behavior: "smooth" });
-  } else if (direction === "up" && index > 0) {
-    sections[index - 1].scrollIntoView({ behavior: "smooth" });
-  }
-}
+  // Use IntersectionObserver to track visible section
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          currentSection = entry.target;
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
 
-// Event listeners for keyboard navigation
-document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowDown") {
-    scrollToSection("down");
-  } else if (e.key === "ArrowUp") {
-    scrollToSection("up");
+  sections.forEach((section) => observer.observe(section));
+
+  function scrollToSection(direction) {
+    const index = Array.from(sections).indexOf(currentSection);
+
+    if (direction === "down" && index < sections.length - 1) {
+      sections[index + 1].scrollIntoView({ behavior: "smooth" });
+    } else if (direction === "up" && index > 0) {
+      sections[index - 1].scrollIntoView({ behavior: "smooth" });
+    }
   }
+
+  // Event listeners for keyboard navigation
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowDown") {
+      scrollToSection("down");
+    } else if (e.key === "ArrowUp") {
+      scrollToSection("up");
+    }
+  });
+
+  // Mousewheel scroll handling
+  window.addEventListener(
+    "wheel",
+    (e) => {
+      if (e.deltaY > 0) {
+        scrollToSection("down");
+      } else if (e.deltaY < 0) {
+        scrollToSection("up");
+      }
+    },
+    { passive: true }
+  );
 });
 
-// Mousewheel scroll handling
-window.addEventListener("wheel", (e) => {
-  if (e.deltaY > 0) {
-    scrollToSection("down");
-  } else if (e.deltaY < 0) {
-    scrollToSection("up");
-  }
-});
-
+// Typing Animation
 document.addEventListener("DOMContentLoaded", () => {
   const text = [
     "Hi, I’m Amin! 👋",
@@ -37,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const welcomeText = document.getElementById("welcomeText");
   const scrollButton = document.getElementById("scrollButton");
-
   let i = 0;
   let line = 0;
 
@@ -46,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (i < text[line].length) {
         welcomeText.innerHTML += text[line].charAt(i);
         i++;
-        setTimeout(() => typeWriter(callback), 30);
+        requestAnimationFrame(() => typeWriter(callback));
       } else {
         welcomeText.innerHTML += "<br />";
         i = 0;
@@ -71,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
   typeWriter(showButton);
 });
 
+// EmailJS Form Submission
 (function () {
   emailjs.init("g1pUfGR5AgOTCye8z");
 })();
@@ -84,18 +107,28 @@ window.onload = function () {
       const form = this;
       const formData = new FormData(form);
 
-      const name = formData.get("user_name");
-      const email = formData.get("user_email");
-      const message = formData.get("message");
+      const name = formData.get("user_name").trim();
+      const email = formData.get("user_email").trim();
+      const message = formData.get("message").trim();
 
       if (!name || !email || !message) {
         renderStatusMessage("Please fill out all fields.", "error");
         return;
       }
 
+      // Email format validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        renderStatusMessage("Please enter a valid email address.", "error");
+        return;
+      }
+
       emailjs.sendForm("service_anq7jbm", "template_t0p83if", form).then(
         () => {
-          renderStatusMessage(`Thank you, ${name}!`, "success");
+          renderStatusMessage(
+            `Thank you, ${name}! We’ve received your message and will get back to you shortly.`,
+            "success"
+          );
           form.reset();
         },
         (error) => {
@@ -109,6 +142,7 @@ window.onload = function () {
     });
 };
 
+// Feedback Message Renderer
 function renderStatusMessage(message, status) {
   const statusElement = document.getElementById("form-status");
   statusElement.textContent = message;
