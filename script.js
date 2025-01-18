@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".section");
   let currentSection = sections[0];
 
-  // Use IntersectionObserver to track visible section
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -156,7 +155,7 @@ function renderStatusMessage(message, status) {
 
   setTimeout(() => {
     statusElement.style.display = "none";
-  }, 5000);
+  }, 3000);
 }
 
 // Custom cursor
@@ -175,5 +174,25 @@ document.querySelectorAll(".circle").forEach((circle) => {
   });
   circle.addEventListener("mouseout", () => {
     cursor.classList.remove("hovered");
+  });
+});
+
+const footer = document.getElementById("footer");
+const targetContainer = document.getElementById("target-container");
+
+// Create a MutationObserver to watch for changes
+const observer = new MutationObserver((mutationsList) => {
+  mutationsList.forEach((mutation) => {
+    if (mutation.type === "childList") {
+      const divRendered = Array.from(mutation.addedNodes).some(
+        (node) => node.nodeType === 1 && node.tagName === "form"
+      );
+
+      if (divRendered) {
+        footer.classList.add("hidden"); // Hide footer
+      } else if (mutation.removedNodes.length > 0) {
+        footer.classList.remove("hidden"); // Show footer if div is removed
+      }
+    }
   });
 });
