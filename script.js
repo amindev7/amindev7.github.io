@@ -60,6 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const welcomeText = document.getElementById("welcomeText");
   const scrollButton = document.getElementById("scrollButton");
+  const languages = document.querySelectorAll(".language");
+
   let i = 0;
   let line = 0;
 
@@ -83,6 +85,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function showButton() {
     scrollButton.style.display = "inline-flex";
     scrollButton.classList.add("fade-in");
+    languages.forEach((language) => {
+      language.classList.add("fade-in");
+    });
   }
 
   scrollButton.addEventListener("click", () => {
