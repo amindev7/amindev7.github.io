@@ -49,17 +49,16 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 });
 
+const welcomeText = document.getElementById("welcomeText");
+const scrollButton = document.getElementById("scrollButton");
+const languages = document.querySelectorAll(".language");
+
 // Typing Animation
 document.addEventListener("DOMContentLoaded", () => {
   const text = [
-    "Hi, I’m Amin! 👋",
-    "I’m a full-stack web and mobile app developer.",
-    "Let’s build something amazing together! 🚀",
+    "Hey there! 👋 I’m Amin.",
+    "Software engineer. <i class='fa-solid fa-code'></i>",
   ];
-
-  const welcomeText = document.getElementById("welcomeText");
-  const scrollButton = document.getElementById("scrollButton");
-  const languages = document.querySelectorAll(".language");
 
   let i = 0;
   let line = 0;
@@ -67,9 +66,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function typeWriter(callback) {
     if (line < text.length) {
       if (i < text[line].length) {
-        welcomeText.innerHTML += text[line].charAt(i);
-        i++;
-        requestAnimationFrame(() => typeWriter(callback));
+        if (text[line][i] === "<") {
+          const htmlTag = text[line].substring(i);
+          welcomeText.innerHTML += htmlTag;
+          i = text[line].length;
+        } else {
+          welcomeText.innerHTML += text[line].charAt(i);
+          i++;
+          requestAnimationFrame(() => typeWriter(callback));
+        }
       } else {
         welcomeText.innerHTML += "<br />";
         i = 0;
@@ -88,6 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
       language.classList.add("fade-in");
     });
   }
+
+  typeWriter(showButton);
 
   scrollButton.addEventListener("click", () => {
     const section2 = document.getElementById("section2");

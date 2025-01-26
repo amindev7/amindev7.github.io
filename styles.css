@@ -93,6 +93,8 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 6px var(--shadow-color);
   white-space: pre-line;
+  transform: scale(1.1);
+  transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
 }
 
 /* Contact Button */
@@ -108,7 +110,7 @@ body {
   font-size: 1.2rem;
   font-weight: bold;
   color: var(--text-color);
-  background-color: var(--secondary-color);
+  background: linear-gradient(135deg, #1b1f2a, #2e3440);
   border: none;
   border-radius: var(--border-radius);
   cursor: none;
@@ -120,11 +122,12 @@ body {
 .contact-me-button.fade-in {
   opacity: 1;
   transform: scale(1);
-  animation: fadeIn 0.8s ease forwards;
+  animation: fadeIn 06.s ease forwards;
 }
 
+.welcome-text:hover,
 .contact-me-button:hover {
-  background-color: var(--accent-color);
+  background: var(--accent-color);
   transform: scale(1.3);
 }
 
