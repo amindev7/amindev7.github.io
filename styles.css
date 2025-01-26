@@ -29,6 +29,7 @@ body {
   overflow: hidden;
   font-family: var(--font-family);
   color: var(--text-color);
+  scroll-behavior: smooth;
 }
 
 input,
@@ -503,5 +504,75 @@ body {
   .circle {
     width: 40px;
     height: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-y: auto; 
+  }
+
+  .welcome-text,
+  .contact-form-container {
+    width: 90%; /* Flexible width */
+    font-size: 1rem;
+    padding: 15px; /
+  }
+
+  .contact-me-button {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+
+  #section1,
+  #section2 {
+    padding-top: 80px;
+  }
+
+  .circle {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Hide Custom Cursor for Mobile */
+@media (hover: none) and (pointer: coarse) {
+  .custom-cursor {
+    display: none; 
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-text,
+  .contact-form-container {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .contact-me-button {
+    padding: 10px 15px;
+    font-size: 0.85rem;
+  }
+
+  #contact-form input[type="text"],
+  #contact-form input[type="email"],
+  #contact-form textarea {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+
+  .footer {
+    font-size: 0.7rem;
+    padding: 8px 0;
+  }
+
+  .footer-links a {
+    font-size: 1.5rem;
+  }
+
+  .circle {
+    width: 30px;
+    height: 30px;
   }
 }
