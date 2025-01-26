@@ -130,7 +130,7 @@ window.onload = function () {
       emailjs.sendForm("service_anq7jbm", "template_t0p83if", form).then(
         () => {
           renderStatusMessage(
-            `Thank you, ${name}! We’ve received your message and will get back to you shortly.`,
+            `Thank you, ${name}! I have received your message and I get back to you shortly.`,
             "success"
           );
           form.reset();
@@ -155,7 +155,7 @@ function renderStatusMessage(message, status) {
 
   setTimeout(() => {
     statusElement.style.display = "none";
-  }, 3000);
+  }, 5000);
 }
 
 // Custom cursor
