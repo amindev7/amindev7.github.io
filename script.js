@@ -1,4 +1,3 @@
-// Section Scrolling Logic
 document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll(".section");
   let currentSection = sections[0];
@@ -51,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const welcomeText = document.getElementById("welcomeText");
 const scrollButton = document.getElementById("scrollButton");
-const languages = document.querySelectorAll(".language");
+const expertisess = document.querySelectorAll(".expertises");
 
 // Typing Animation
 document.addEventListener("DOMContentLoaded", () => {
@@ -89,8 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function showButton() {
     scrollButton.style.display = "inline-flex";
     scrollButton.classList.add("fade-in");
-    languages.forEach((language) => {
-      language.classList.add("fade-in");
+    expertisess.forEach((expertises) => {
+      expertises.classList.add("fade-in");
     });
   }
 
